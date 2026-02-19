@@ -57,6 +57,13 @@
         animation: float 6s linear infinite;
     }
 
+    .daily-message {
+    margin-top: 20px;
+    font-size: 16px;
+    opacity: 0.95;
+    font-style: italic;
+    }
+
     @keyframes float {
         0% { transform: translateY(100vh); opacity: 1; }
         100% { transform: translateY(-10vh); opacity: 0; }
@@ -69,6 +76,7 @@
 
 <div class="container">
     <h1>Countdown to Our Day 💖</h1>
+    <div class="daily-message" id="dailyMessage"></div>
     <div class="subtitle">28th March 2026 ✨</div>
     <div class="numbers" id="numbers"></div>
 </div>
@@ -115,6 +123,33 @@
     }
 
     setInterval(createHeart, 800);
+
+    const messages = [
+    "Every day brings us closer 💕",
+    "You are my favorite notification 💌",
+    "One more day closer to forever 💍",
+    "I’d choose you again. Always. ❤️",
+    "Counting days, but loving you timelessly ✨",
+    "Our story is my favorite story 📖",
+    "Forever is just the beginning 💖"
+    ];
+
+    function showDailyMessage() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+    
+        const daysLeft = Math.floor(diff / (1000 * 60 * 60 * 24));
+    
+        // Rotate message based on days left
+        const messageIndex = Math.abs(daysLeft) % messages.length;
+    
+        document.getElementById("dailyMessage").innerText =
+            messages[messageIndex];
+    }
+    
+    setInterval(showDailyMessage, 1000);
+    showDailyMessage();
+        
 </script>
 
 </body>
